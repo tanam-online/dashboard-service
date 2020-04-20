@@ -17,11 +17,16 @@ In the project directory, you can run:
 
 ### `npm install`
 
-Install required dependencies. (Only for first time).
+Install required dependencies.
 
 ### `npm start`
 
 Runs the app in the development mode.<br />
+API will run on [http://localhost:4000](http://localhost:4000).
+
+### `npm run dev`
+
+Runs the app in the development mode with hot reload.<br />
 API will run on [http://localhost:4000](http://localhost:4000).
 
 ### `npm run lint`
