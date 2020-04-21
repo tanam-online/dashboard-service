@@ -4,6 +4,13 @@ var Util = require('../helper/util')
 var ML = require('../helper/ml')
 
 /*
+ * Check if API is live.
+ */
+router.get('/', (req, res) => {
+  res.send('You are connected')
+})
+
+/*
  * Get data for real-time monitoring
  * Constraint: Min timeStart = lahan(created_at), Max timeEnd = today, format = dd-mm-yyyy
  */
