@@ -36,10 +36,10 @@ exports.calculateAverage = (data) => {
     }
   })
   const result = {
-    suhu: temp.temperature / data.length,
-    kelembaban: temp.humidity / data.length,
-    cahaya: temp.light / data.length,
-    angin: temp.wind / data.length,
+    suhu: (temp.temperature / data.length).toPrecision(4),
+    kelembaban: (temp.humidity / data.length).toPrecision(4),
+    cahaya: (temp.light / data.length).toPrecision(6),
+    angin: (temp.wind / data.length).toPrecision(4),
     cuaca: null
   }
   if (temp.sunny >= temp.cloudy && temp.sunny >= temp.rain) {
@@ -103,7 +103,7 @@ exports.randomDatetime = async (distance) => {
     year = new Date().getFullYear()
   } else if (distance === 'far') {
     date = Math.floor(Math.random() * 28)
-    month = monthEnum[Math.floor(Math.random() * 13)]
+    month = monthEnum[Math.floor(Math.random() * 12) + 1]
     year = Math.floor(Math.random() * 2) + new Date().getFullYear()
   }
   const hour = ('0' + Math.floor(Math.random() * 24)).slice(-2)
