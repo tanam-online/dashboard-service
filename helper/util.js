@@ -87,29 +87,27 @@ exports.randomTime = (start, end) => {
 }
 
 exports.randomDatetime = async (distance) => {
-	monthEnum = [
-		'Januari', 'Februari', 'Maret', 'April',
-		'Mei', 'Juni', 'Juli', 'Agustus',
-		'September', 'Oktober', 'November', 'Desember'
-	]
-	let date, month, year
-	if (distance === 'near') {
-		date = Math.floor(Math.random() * 1) + new Date().getDate()
-		month = monthEnum[new Date().getMonth()]
-		year = new Date().getFullYear()
-	}
-	else if (distance === 'medium') {
-		date = Math.floor(Math.random() * 5) + new Date().getDate()
-		month = monthEnum[(Math.floor(Math.random() * 3) + new Date().getMonth()) % 12]
-		year = new Date().getFullYear()
-	}
-	else if (distance === 'far') {
-		date = Math.floor(Math.random() * 28)
-		month = monthEnum[Math.floor(Math.random() * 13)]
-		year = Math.floor(Math.random() * 2) + new Date().getFullYear()
-	}
-	const hour = ('0' + Math.floor(Math.random() * 24)).slice(-2)
-	const minute = ('0' + Math.floor(Math.random() * 60)).slice(-2)
-	const second = ('0' + Math.floor(Math.random() * 60)).slice(-2)
-	return date + ' ' + month + ' ' + year + ' pada waktu ' + hour + ':' + minute + ':' + second
+  const monthEnum = [
+    'Januari', 'Februari', 'Maret', 'April',
+    'Mei', 'Juni', 'Juli', 'Agustus',
+    'September', 'Oktober', 'November', 'Desember'
+  ]
+  let date, month, year
+  if (distance === 'near') {
+    date = Math.floor(Math.random() * 1) + new Date().getDate()
+    month = monthEnum[new Date().getMonth()]
+    year = new Date().getFullYear()
+  } else if (distance === 'medium') {
+    date = Math.floor(Math.random() * 5) + new Date().getDate()
+    month = monthEnum[(Math.floor(Math.random() * 3) + new Date().getMonth()) % 12]
+    year = new Date().getFullYear()
+  } else if (distance === 'far') {
+    date = Math.floor(Math.random() * 28)
+    month = monthEnum[Math.floor(Math.random() * 13)]
+    year = Math.floor(Math.random() * 2) + new Date().getFullYear()
+  }
+  const hour = ('0' + Math.floor(Math.random() * 24)).slice(-2)
+  const minute = ('0' + Math.floor(Math.random() * 60)).slice(-2)
+  const second = ('0' + Math.floor(Math.random() * 60)).slice(-2)
+  return date + ' ' + month + ' ' + year + ' pada waktu ' + hour + ':' + minute + ':' + second
 }
