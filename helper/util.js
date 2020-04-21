@@ -9,8 +9,44 @@ exports.getSensorData = async (landId, timeStart, timeEnd) => {
   return result
 }
 
-exports.calculateAverage = async (data) => {
-
+exports.calculateAverage = (data) => {
+  const temp = {
+    temperature: 0,
+    humidity: 0,
+    light: 0,
+    wind: 0,
+    sunny: 0,
+    cloudy: 0,
+    rain: 0
+  }
+  data.map(item => {
+    temp.temperature += item.suhu
+    temp.humidity += item.kelembaban
+    temp.light += item.cahaya
+    temp.wind += item.angin
+    if (item.cuaca === 'Cerah') {
+      temp.sunny++
+    } else if (item.cuaca === 'Berawan') {
+      temp.cloudy++
+    } else if (item.cuaca === 'Hujan') {
+      temp.rain++
+    }
+  })
+  const result = {
+    suhu: temp.temperature / data.length,
+    kelembaban: temp.humidity / data.length,
+    cahaya: temp.light / data.length,
+    angin: temp.wind / data.length,
+    cuaca: null
+  }
+  if (temp.sunny >= temp.cloudy && temp.sunny >= temp.rain) {
+    result.cuaca = 'Cerah'
+  } else if (temp.cloudy >= temp.sunny && temp.cloudy >= temp.rain) {
+    result.cuaca = 'Berawan'
+  } else if (temp.rain >= temp.sunny && temp.rain >= temp.cloudy) {
+    result.cuaca = 'Hujan'
+  }
+  return result
 }
 
 exports.compareTime = async (time1, time2) => {

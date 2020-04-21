@@ -43,22 +43,14 @@ router.get('/real-time/:landId/:timeStart?/:timeEnd?', async (req, res) => {
  * Get data for prediction of land conditions
  * Constraint: Min time = today, Max time = 5 years, time is dd-mm-yyyy
  */
-router.get('/prediction/:landId/:time', (req, res) => {
+router.get('/prediction/:landId/:time', async (req, res) => {
   try {
     if (!req.params.landId || !req.params.time) {
       return res.status(400).send({ status: 400, message: 'No landId or time provided' })
     }
-    // Util.timeParser()
-    const time = req.params.time ? req.params.time : Date.now()
-    const responseData = Util.getSensorData(req.params.landId, time)
-    const data = responseData ? responseData.rows : null
-    if (!data) {
-      return res.status(400).send({ status: 400, message: 'Data is empty' })
-    }
-    const predictedData = ML.predict(data)
-    const responseAverage = Util.calculateAverage(predictedData)
+    const predictedData = await ML.predict(req.params.landId, req.params.time)
+    const responseAverage = await Util.calculateAverage(predictedData)
     const average = responseAverage || null
-    // request.post getPredictionML()
     const results = {
       status: 'Successfully get predicted data',
       data: {
@@ -76,7 +68,7 @@ router.get('/prediction/:landId/:time', (req, res) => {
 /*
  * Get recommendation for certain land
  */
-router.get('/recommendation/:landId', (req, res) => {
+router.get('/recommendation/:landId', async (req, res) => {
   Util.getSensorData()
   ML.recommend()
   // request.post getRecommendationML()
