@@ -1,6 +1,6 @@
-# Tanam Monitoring Service
+# Tanam Dashboard Service
 
-API is accessible on [api-monitoring-tanam.herokuapp.com](https://api-monitoring-tanam.herokuapp.com).<br />
+API is accessible on [api-dashboard-tanam.herokuapp.com](https://api-dashboard-tanam.herokuapp.com).<br />
 
 This project was bootstrapped with [Express Generator](https://expressjs.com/en/starter/generator.html).
 
