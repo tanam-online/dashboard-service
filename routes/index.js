@@ -12,8 +12,8 @@ router.get('/real-time/:landId/:timeStart?/:timeEnd?', async (req, res) => {
     if (!req.params.landId) {
       return res.status(400).send({ status: 400, message: 'No landId provided' })
     }
-    const timeStart = req.params.timeStart ? req.params.timeStart : Util.createTime(Date.now())
-    const timeEnd = req.params.timeEnd ? req.params.timeEnd : Util.createTime(Date.now())
+    const timeStart = req.params.timeStart ? req.params.timeStart : Util.createDate(Date.now())
+    const timeEnd = req.params.timeEnd ? req.params.timeEnd : Util.createDate(Date.now())
     const isInvalidTime = (await Util.compareTime(timeStart, timeEnd)).rows[0]['?column?']
     if (isInvalidTime) {
       return res.status(400).send({ status: 400, message: 'Time start must not exceed time end' })
@@ -41,7 +41,7 @@ router.get('/real-time/:landId/:timeStart?/:timeEnd?', async (req, res) => {
 
 /*
  * Get data for prediction of land conditions
- * Constraint: Min time = today, Max time = 5 years, time is dd-mm-yyyy
+ * Constraint: time is dd-mm-yyyy
  */
 router.get('/prediction/:landId/:time', async (req, res) => {
   try {
@@ -69,10 +69,20 @@ router.get('/prediction/:landId/:time', async (req, res) => {
  * Get recommendation for certain land
  */
 router.get('/recommendation/:landId', async (req, res) => {
-  Util.getSensorData()
-  ML.recommend()
-  // request.post getRecommendationML()
-  res.send('recommendation')
+  try {
+    if (!req.params.landId) {
+      return res.status(400).send({ status: 400, message: 'No landId provided' })
+    }
+    const recommendationList = await ML.recommend()
+    const results = {
+      status: 'Successfully get recommendation list',
+      data: recommendationList
+    }
+    res.send(results)
+  } catch (err) {
+    console.error(err)
+    return res.status(500).send(err)
+  }
 })
 
 module.exports = router

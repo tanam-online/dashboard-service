@@ -1,3 +1,5 @@
+var Util = require('./util')
+
 exports.predict = (landId, time) => {
   const cuacaEnum = ['Cerah', 'Berawan', 'Hujan']
   const result = []
@@ -14,4 +16,24 @@ exports.predict = (landId, time) => {
     result.push(data)
   }
   return result
+}
+
+exports.recommend = async () => {
+  const pesticideEnum = [
+    'Fungisida',
+    'Herbisida',
+    'Insektisida',
+    'Nematisida',
+    'Rodentisida'
+  ]
+  const listEnum = [
+    'Siram lahan selanjutnya pada ' + await Util.randomDatetime('near'),
+    'Beri pupuk selanjutnya pada ' + await Util.randomDatetime('near'),
+    'Beri pestisida selanjutnya pada ' + await Util.randomDatetime('medium')
+     + ' dengan jenis pestisida ' + pesticideEnum[Math.floor(Math.random() * 6)],
+    'Lahan siap panen pada ' + await Util.randomDatetime('far'),
+    'Panen selanjutnya diprediksi sebanyak ' + (Math.random() * 10).toPrecision(4) + ' ton'
+    //'Untuk musim selanjutnya, direkomendasikan menanam tanaman'
+  ]
+  return listEnum
 }
