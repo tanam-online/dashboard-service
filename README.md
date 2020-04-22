@@ -1,5 +1,7 @@
 # Tanam Dashboard Service
 
+API is documented at Swagger [app.swaggerhub.com/apis-docs/isfanr/Tanam](https://app.swaggerhub.com/apis-docs/isfanr/Tanam/1.0.0).<br />
+
 API is accessible on [api-dashboard-tanam.herokuapp.com](https://api-dashboard-tanam.herokuapp.com).<br />
 
 This project was bootstrapped with [Express Generator](https://expressjs.com/en/starter/generator.html).
@@ -8,7 +10,9 @@ This project was bootstrapped with [Express Generator](https://expressjs.com/en/
 
 ``` bash
 [GET] '/' = Check if API is live
-TBD...
+[GET] '/real-time/:landId/:timeStart?/:timeEnd?' = Get data for real-time monitoring
+[GET] '/prediction/:landId/:time' = Get data for prediction of land conditions
+[GET] '/recommendation/:landId' = Get recommendation for certain land
 ```
 
 ## Available Scripts

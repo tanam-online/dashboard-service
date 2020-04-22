@@ -5,7 +5,7 @@ CREATE TABLE pengguna (
 	password VARCHAR,
 	role VARCHAR,
 	no_telepon VARCHAR,
-	created_at TIMESTAMP
+	created_at TIMESTAMPTZ
 );
 
 CREATE TABLE lahan (
@@ -14,7 +14,7 @@ CREATE TABLE lahan (
 	nama VARCHAR,
 	deskripsi TEXT,
 	tanaman VARCHAR,
-	created_at TIMESTAMP,
+	created_at TIMESTAMPTZ,
 	CONSTRAINT pengguna_lahan_idpengguna_fkey FOREIGN KEY (id_pengguna)
       REFERENCES pengguna (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -28,7 +28,7 @@ CREATE TABLE data_sensor (
 	cahaya INTEGER,
 	angin INTEGER,
 	cuaca VARCHAR,
-	waktu TIMESTAMP,
+	waktu TIMESTAMPTZ,
 	CONSTRAINT lahan_datasensor_idlahan_fkey FOREIGN KEY (id_lahan)
       REFERENCES lahan (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
@@ -56,3 +56,5 @@ CREATE TABLE data_manual (
       REFERENCES lahan (id) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+SET timezone = 'Asia/Jakarta';

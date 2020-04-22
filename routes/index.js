@@ -62,7 +62,7 @@ router.get('/prediction/:landId/:time', async (req, res) => {
       status: 'Successfully get predicted data',
       data: {
         average: average,
-        predicted_data: predictedData
+        sensor_data: predictedData
       }
     }
     res.send(results)
