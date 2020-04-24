@@ -30,7 +30,7 @@ exports.recommend = async () => {
     'Siram lahan selanjutnya pada ' + await Util.randomDatetime('near'),
     'Beri pupuk selanjutnya pada ' + await Util.randomDatetime('near'),
     'Beri pestisida selanjutnya pada ' + await Util.randomDatetime('medium') +
-     ' dengan jenis pestisida ' + pesticideEnum[Math.floor(Math.random() * 6)],
+     ' dengan jenis pestisida ' + pesticideEnum[Math.floor(Math.random() * 5)],
     'Lahan siap panen pada ' + await Util.randomDatetime('far'),
     'Panen selanjutnya diprediksi sebanyak ' + (Math.random() * 10).toPrecision(4) + ' ton'
     // 'Untuk musim selanjutnya, direkomendasikan menanam tanaman'

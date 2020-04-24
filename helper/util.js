@@ -103,7 +103,7 @@ exports.randomDatetime = async (distance) => {
     year = new Date().getFullYear()
   } else if (distance === 'far') {
     date = Math.floor(Math.random() * 28)
-    month = monthEnum[Math.floor(Math.random() * 12) + 1]
+    month = monthEnum[Math.floor(Math.random() * 11) + 1]
     year = Math.floor(Math.random() * 2) + new Date().getFullYear()
   }
   const hour = ('0' + Math.floor(Math.random() * 24)).slice(-2)
