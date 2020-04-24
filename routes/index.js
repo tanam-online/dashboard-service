@@ -25,7 +25,7 @@ router.get('/real-time/:landId/:timeStart?/:timeEnd?', async (req, res) => {
     if (isInvalidTime) {
       return res.status(400).send({ status: 400, message: 'Time start must not exceed time end' })
     }
-    const responseData = await Util.getSensorData(req.params.landId, timeStart, timeEnd)
+    const responseData = await Util.getSensorData(parseInt(req.params.landId), timeStart, timeEnd)
     const data = responseData ? responseData.rows : null
     if (!data || data.length === 0) {
       return res.status(400).send({ status: 400, message: 'Data is empty' })
@@ -55,7 +55,7 @@ router.get('/prediction/:landId/:time', async (req, res) => {
     if (!req.params.landId || !req.params.time) {
       return res.status(400).send({ status: 400, message: 'No landId or time provided' })
     }
-    const predictedData = await ML.predict(req.params.landId, req.params.time)
+    const predictedData = await ML.predict(parseInt(req.params.landId), req.params.time)
     const responseAverage = await Util.calculateAverage(predictedData)
     const average = responseAverage || null
     const results = {

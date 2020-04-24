@@ -17,7 +17,7 @@ CREATE TABLE lahan (
 	created_at TIMESTAMPTZ,
 	CONSTRAINT pengguna_lahan_idpengguna_fkey FOREIGN KEY (id_pengguna)
       REFERENCES pengguna (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 CREATE TABLE data_sensor (
@@ -31,7 +31,7 @@ CREATE TABLE data_sensor (
 	waktu TIMESTAMPTZ,
 	CONSTRAINT lahan_datasensor_idlahan_fkey FOREIGN KEY (id_lahan)
       REFERENCES lahan (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 CREATE TABLE panen (
@@ -43,7 +43,7 @@ CREATE TABLE panen (
 	waktu VARCHAR,
 	CONSTRAINT lahan_panen_idlahan_fkey FOREIGN KEY (id_lahan)
       REFERENCES lahan (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 CREATE TABLE data_manual (
@@ -54,7 +54,7 @@ CREATE TABLE data_manual (
 	waktu VARCHAR,
 	CONSTRAINT lahan_datamanual_idlahan_fkey FOREIGN KEY (id_lahan)
       REFERENCES lahan (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 );
 
 SET timezone = 'Asia/Jakarta';
