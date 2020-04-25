@@ -4,8 +4,13 @@ var format = 'dd-mm-yyyy'
 exports.getSensorData = async (landId, timeStart, timeEnd) => {
   const client = await pool.connect()
   const newFormat = format + ' hh24:mi:ss'
-  timeStart += ' 00:00:00'
-  timeEnd += ' 23:59:59'
+  const dayStart = parseInt(timeStart.slice(0, 2))
+  if (dayStart > 1) {
+    timeStart = (dayStart - 1).toString() + timeStart.slice(2) + ' 17:00:00'
+  } else {
+    timeStart = '30' + timeStart.slice(2) + ' 17:00:00'
+  }
+  timeEnd += ' 16:59:59'
   const result = await client.query(`SELECT * FROM data_sensor WHERE id_lahan = $1 AND waktu >= to_timestamp($2, $4)
                                      AND waktu < to_timestamp($3, $4);`, [landId, timeStart, timeEnd, newFormat])
   client.release()
