@@ -4,9 +4,9 @@ var format = 'dd-mm-yyyy'
 exports.getSensorData = async (landId, timeStart, timeEnd) => {
   const client = await pool.connect()
   const newFormat = format + ' hh24:mi:ss'
-  const dayStart = parseInt(timeStart.slice(0, 2))
+  const dayStart = parseInt(timeStart.slice(0, 2), 10)
   if (dayStart > 1) {
-    timeStart = (dayStart - 1).toString() + timeStart.slice(2) + ' 17:00:00'
+    timeStart = ('0' + (dayStart - 1).toString()).slice(-2) + timeStart.slice(2) + ' 17:00:00'
   } else {
     timeStart = '30' + timeStart.slice(2) + ' 17:00:00'
   }
