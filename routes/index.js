@@ -20,7 +20,7 @@ router.get('/real-time/:landId/:timeStart?/:timeEnd?', async (req, res) => {
       return res.status(400).send({ status: 400, message: 'No landId provided' })
     }
     const timeStart = req.params.timeStart ? req.params.timeStart : Util.createDate(Date.now())
-    const timeEnd = req.params.timeEnd ? req.params.timeEnd : Util.createDate(Date.now())
+    const timeEnd = req.params.timeEnd ? req.params.timeEnd : Util.createDate(Date.now() + (1 * 24 * 60 * 60 * 1000))
     const isInvalidTime = (await Util.compareTime(timeStart, timeEnd)).rows[0]['?column?']
     if (isInvalidTime) {
       return res.status(400).send({ status: 400, message: 'Time start must not exceed time end' })

@@ -59,8 +59,7 @@ exports.calculateAverage = (data) => {
 
 exports.compareTime = async (time1, time2) => {
   const client = await pool.connect()
-  console.log('time1 = ', time1, '; time2 = ', time2)
-  const result = await client.query('SELECT to_timestamp($1, $3) >= to_timestamp($2, $3);', [time1, time2, format])
+  const result = await client.query('SELECT to_timestamp($1, $3) > to_timestamp($2, $3);', [time1, time2, format])
   client.release()
   return result
 }
